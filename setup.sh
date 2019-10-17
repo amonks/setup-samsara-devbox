@@ -24,6 +24,7 @@ function end_section() {
 section Updating package repositories
 
 add-apt-repository ppa:neovim-ppa/unstable -y
+apt-add-repository ppa:fish-shell/release-3
 
 apt-get update -y
 apt-get upgrade -y
