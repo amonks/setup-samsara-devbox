@@ -12,3 +12,7 @@ eval (direnv hook fish)
 
 alias config='/usr/bin/git --git-dir=/home/ubuntu/.cfg/ --work-tree=/home/ubuntu'
 
+if test $TERM != "screen"
+  exec tmux
+end
+
