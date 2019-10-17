@@ -35,7 +35,6 @@ echo
 
 
 
-
 if ! which fish; then
 	section Installing fish shell
 	apt-get install fish -y
@@ -57,5 +56,15 @@ if ! which nvim; then
 fi
 echo
 
+
+
 section 🎉 Done!
 
+echo If this is your first boot, set a password with,
+echo
+echo     sudo passwd ubuntu
+echo
+echo then set your shell with,
+echo
+echo    chsh -s /usr/bin/fish
+echo
