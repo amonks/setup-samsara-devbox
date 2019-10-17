@@ -20,6 +20,7 @@ function fish_prompt
   set -l none     "◦"
 
   # pwd
+  echo -n "☁️ 🦉 "
   echo -n $cyan(prompt_pwd) $normal_color
 
   if git_is_repo
