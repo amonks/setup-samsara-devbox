@@ -1,0 +1,160 @@
+#!/usr/bin/env fish
+
+
+set help "
+troy regen
+==========
+
+Usage example:
+
+  regen [base = orgin/master] [last_commit = HEAD] [first_commit = base]
+
+So for example, if you are on a branch and you want to regen against master:
+
+  regen
+
+If that regen fails, and you want to resume:
+
+  regen HEAD my/feature next/commit/in/non/rebased/branch
+
+TODO:
+- how to resume: do i fix the tests and then run that? do I fix the commit in the non-rebased-branch and then run that? idk
+
+# optional
+export REGEN='yarn jest -u'
+
+Regen plays the commits from "'$last_commit'" to "'$first_commit'" onto "'$base'".
+
+It runs snapshots and whatnot on each commit, amending as it goes.
+"
+if not test -e $argv
+  if test $argv = "--help"
+    echo $help
+    exit 0
+  end
+end
+
+
+
+# helpers
+
+function exclaim
+  echo $argv
+  say $argv
+end
+
+function guard
+  if test $status -ne 0
+    exclaim $argv
+    exit 1
+  end
+end
+
+function enquote
+  perl -pe 's/^(.*)$/"$1"/g'
+end
+
+function get_env
+  cd $BACKEND_ROOT
+  eval (direnv export fish)
+  cd mobile/Troy
+  eval (direnv export fish)
+end
+
+function update
+  get_env
+  and find . -name '*.shot' | enquote | xargs rm
+  and yarn
+  and git clean -fd react
+  and sync-copied-ts
+  and gql-schema-ts
+  and generate-gql-subscription-mocks
+  and rm -rf react/snaps
+  and generate-component-tests
+  and yarn lint --fix
+  and ./bin/prettier-write
+  and yarn jest react -u
+end
+
+function sha
+  echo $argv | cut -d ' ' -f 1
+end
+
+set update_commit update
+if not test -e $REGEN
+  set update_commit $REGEN
+end
+
+# jank support for single thingy
+
+if not test -e $one
+  update
+  guard "fail"
+  exit 0
+end
+
+# get args
+
+set base "origin/master"
+if not test -e $argv[1]
+  set base $argv[1]
+end
+
+set last_commit "HEAD"
+if not test -e $argv[2]
+  set last_commit $argv[2]
+end
+
+set first_commit "$base"
+if not test -e $argv[3]
+  set first_commit $argv[3]
+end
+
+# Reverse commits
+
+echo "git log --oneline $first_commit..$last_commit"
+for commit in (git log --oneline $first_commit..$last_commit)
+  set commits $commit $commits
+end
+clear
+for commit in $commits
+  echo $commit
+end
+echo
+
+if test (count $commits) -eq 0
+  echo No commits.
+  exit 1
+end
+
+echo "rebase $first_commit..$last_commit onto $base?"
+echo
+read ok -P "y/n "
+echo
+if not string match -r "^[Yy].*" $ok
+  echo Not rebasing.
+  exit 1
+end
+
+# do it
+
+git checkout $base
+
+for commit in $commits
+  echo $commit
+
+  git cherry-pick (sha $commit)
+  guard "bad cherry pick"
+
+  $update_commit
+  guard "tests failed"
+
+  git add ../..
+  git commit --amend --no-edit
+end
+
+
+echo done
+
+
+
