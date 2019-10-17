@@ -24,7 +24,6 @@ function end_section() {
 section Updating package repositories
 
 add-apt-repository ppa:neovim-ppa/unstable -y
-add-apt-repository ppa:jonathonf/python-3.6 -y
 
 apt-get update -y
 apt-get upgrade -y
