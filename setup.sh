@@ -55,6 +55,26 @@ if ! which nvim; then
 fi
 echo
 
+if ! which rg; then
+	section Installing ripgrep
+	rg_version=11.0.2
+	wget https://github.com/BurntSushi/ripgrep/releases/download/${rg_version}/ripgrep_${rg_version}_amd64.deb
+	apt install ./ripgrep_${rg_version}_amd64.deb
+	rm ./ripgrep_${rg_version}_amd64.deb
+	end_section
+fi
+echo
+
+if ! which fdfind; then
+	section Installing fd
+	fd_version=7.4.0
+	wget https://github.com/sharkdp/fd/releases/download/v${fd_version}/fd_${fd_version}_amd64.deb
+	apt install ./fd_${fd_version}_amd64.deb
+	rm ./fd_${fd_version}_amd64.deb
+	end_section
+fi
+echo
+
 
 
 section 🎉 Done!
