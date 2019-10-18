@@ -24,7 +24,7 @@ function end_section() {
 section Updating package repositories
 
 add-apt-repository ppa:neovim-ppa/unstable -y
-apt-add-repository ppa:fish-shell/release-3
+apt-add-repository ppa:fish-shell/release-3 -y
 
 apt-get update -y
 apt-get upgrade -y
@@ -78,14 +78,14 @@ echo
 
 if ! test -f /usr/share/autojump/autojump.fish; then
 	section Installing autojump
-	apt-get install autojump
+	apt-get install autojump -y
 	end_section
 fi
 echo
 
 if ! which mosh; then
 	section Installing mosh
-	apt-get install mosh
+	apt-get install mosh -y
 	end_section
 fi
 echo
