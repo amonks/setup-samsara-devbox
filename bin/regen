@@ -64,7 +64,7 @@ end
 function update
   get_env
   and find . -name '*.shot' | enquote | xargs rm
-  and yarn
+  yarn
   and git clean -fd react
   and sync-copied-ts
   and gql-schema-ts
