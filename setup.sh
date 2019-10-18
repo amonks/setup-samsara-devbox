@@ -97,9 +97,9 @@ section 🎉 Done!
 
 echo If this is your first boot, set a password with,
 echo
-echo     sudo passwd ubuntu
+echo '    sudo passwd ubuntu'
 echo
 echo then set your shell with,
 echo
-echo    chsh -s /usr/bin/fish
+echo '   chsh -s /usr/bin/fish'
 echo
