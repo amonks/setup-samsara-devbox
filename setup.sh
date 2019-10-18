@@ -66,7 +66,7 @@ if ! which rg; then
 fi
 echo
 
-if ! which fdfind; then
+if ! which fd; then
 	section Installing fd
 	fd_version=7.4.0
 	wget https://github.com/sharkdp/fd/releases/download/v${fd_version}/fd_${fd_version}_amd64.deb
