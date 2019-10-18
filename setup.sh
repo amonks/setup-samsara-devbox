@@ -76,6 +76,13 @@ if ! which fd; then
 fi
 echo
 
+if ! test -f /usr/share/autojump/autojump.fish; then
+	section Installing autojump
+	apt-get install autojump
+	end_section
+fi
+echo
+
 
 
 section 🎉 Done!
