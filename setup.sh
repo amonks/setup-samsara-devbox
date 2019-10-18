@@ -83,6 +83,14 @@ if ! test -f /usr/share/autojump/autojump.fish; then
 fi
 echo
 
+if ! which mosh; then
+	section Installing mosh
+	apt-get install mosh
+	end_section
+fi
+echo
+
+
 
 
 section 🎉 Done!
