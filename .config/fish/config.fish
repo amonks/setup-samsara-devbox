@@ -12,6 +12,11 @@ eval (direnv hook fish)
 
 alias config='/usr/bin/git --git-dir=/home/ubuntu/.cfg/ --work-tree=/home/ubuntu'
 
+if not test -S ~/.ssh/ssh_auth_sock; and test -S "$SSH_AUTH_SOCK"
+	ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+	export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+end
+
 if test $TERM != "screen"
   exec tmux
 end
