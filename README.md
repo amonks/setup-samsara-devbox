@@ -4,3 +4,12 @@ git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
 sudo ./setup.sh
 ```
 
+then…
+
+```bash
+vim ~/.tmux.conf
+config add ~/.tmux.conf
+config commit
+config push
+```
+
