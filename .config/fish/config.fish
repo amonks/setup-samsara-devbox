@@ -6,7 +6,7 @@ fish_vi_key_bindings
 
 set -x FZF_DEFAULT_COMMAND 'fd --type f -I'
 
-set -x PATH $PATH ~/bin
+set -x PATH $PATH ~/bin /snap/bin
 
 eval (direnv hook fish)
 
