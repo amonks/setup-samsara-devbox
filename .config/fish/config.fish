@@ -18,6 +18,6 @@ if not test -S ~/.ssh/ssh_auth_sock; and test -S "$SSH_AUTH_SOCK"
 end
 
 if test $TERM != "screen"
-  exec tmux
+  exec tmux new-session -A -s main
 end
 
