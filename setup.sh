@@ -23,12 +23,12 @@ function end_section() {
 
 section Updating package repositories
 
-add-apt-repository ppa:neovim-ppa/unstable -y
-apt-add-repository ppa:fish-shell/release-3 -y
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt-add-repository ppa:fish-shell/release-3 -y
 
-apt-get update -y
-apt-get upgrade -y
-apt-get dist-upgrade -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
 
 end_section
 echo
@@ -37,7 +37,7 @@ echo
 
 if ! which fish; then
   section Installing fish shell
-  apt-get install fish -y
+  sudo apt-get install fish -y
   end_section
 fi
 echo
@@ -51,7 +51,7 @@ echo
 
 if ! which nvim; then
   section Installing neovim
-  apt-get install neovim  -y
+  sudo apt-get install neovim  -y
   end_section
 fi
 echo
@@ -60,7 +60,7 @@ if ! which rg; then
   section Installing ripgrep
   rg_version=11.0.2
   wget https://github.com/BurntSushi/ripgrep/releases/download/${rg_version}/ripgrep_${rg_version}_amd64.deb
-  apt install ./ripgrep_${rg_version}_amd64.deb
+  sudo apt install ./ripgrep_${rg_version}_amd64.deb
   rm ./ripgrep_${rg_version}_amd64.deb
   end_section
 fi
@@ -70,7 +70,7 @@ if ! which fd; then
   section Installing fd
   fd_version=7.4.0
   wget https://github.com/sharkdp/fd/releases/download/v${fd_version}/fd_${fd_version}_amd64.deb
-  apt install ./fd_${fd_version}_amd64.deb
+  sudo apt install ./fd_${fd_version}_amd64.deb
   rm ./fd_${fd_version}_amd64.deb
   end_section
 fi
@@ -78,22 +78,22 @@ echo
 
 if ! test -f /usr/share/autojump/autojump.fish; then
   section Installing autojump
-  apt-get install autojump -y
+  sudo apt-get install autojump -y
   end_section
 fi
 echo
 
 if ! which mosh; then
   section Installing mosh
-  apt-get install mosh -y
+  sudo apt-get install mosh -y
   end_section
 fi
 echo
 
 if ! which node; then
   section Installing node
-  curl -sL https://deb.nodesource.com/setup_13.x | bash -
-  apt-get install -y nodejs
+  curl -sL https://deb.nodesource.com/setup_13.x | sudo bash -
+  sudo apt-get install -y nodejs
   end_section
 fi
 echo
