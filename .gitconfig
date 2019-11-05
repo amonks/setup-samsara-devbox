@@ -1,0 +1,27 @@
+[branch "master"]
+	rebase = true
+[merge "ours"]
+	driver = true
+[user]
+	email = andrew.monks@samsara.com
+	name = monks
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+
+[core]
+    editor = vim
+
+[alias]
+    p = "!f() { branch=$(git rev-parse --abbrev-ref HEAD); git push --force-with-lease --set-upstream -- origin $branch; }; f"
+    summon = "!f() { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b ; }; f"
+    branches = "branch --sort=-committerdate"
+    touching = "rev-list --all --format=%B"
+    fix-dates = "rebase $1 --exec \"git commit --amend --reset-author --no-edit\""
+    switch = "!f() { b=`git branches | fzf` ; git checkout $b ; }; f"
+
+
+
