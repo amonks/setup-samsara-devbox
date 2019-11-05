@@ -105,6 +105,15 @@ if ! which neovim-node-host; then
 fi
 echo
 
+if ! which fzf; then
+  section Installing fzf
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+  end_section
+fi
+echo
+
+
 
 
 
