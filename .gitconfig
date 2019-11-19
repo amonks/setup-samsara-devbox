@@ -20,7 +20,7 @@
     summon = "!f() { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b ; }; f"
     branches = "branch --sort=-committerdate"
     touching = "rev-list --all --format=%B"
-    fix-dates = "rebase $1 --exec \"git commit --amend --reset-author --no-edit\""
+    fix-dates = "!f() { merge_base=$(git merge-base HEAD origin/master) ; git rebase $merge_base --exec \"git commit --amend --reset-author --no-edit\"; }; f"
     switch = "!f() { b=`git branches | fzf` ; git checkout $b ; }; f"
 
 
