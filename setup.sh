@@ -100,7 +100,7 @@ echo
 
 if ! which neovim-node-host; then
   section Installing neovim node host
-  npm i -g neovim
+  sudo npm i -g neovim
   end_section
 fi
 echo
