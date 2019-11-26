@@ -21,4 +21,6 @@ if test $TERM != "screen"; and test -z "$TMUX"
   exec tmux new-session -A -s main
 end
 
-source secrets.fish
+source ~/secrets.fish
+source ~/.config/fish/abbreviations.fish
+
