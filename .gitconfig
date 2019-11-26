@@ -16,17 +16,21 @@
     editor = vim
 
 [alias]
+    r = "!f() { git fetch && target=$(git safe-rebase-target) && git rebase $target --exec \"git commit --amend --reset-author --no-edit\" ; }; f"
+    ri= "!f() { git fetch && target=$(git safe-rebase-target) && git rebase -i $target && git rebase $target --exec \"git commit --amend --reset-author --no-edit\" ; }; f"
+    p = "!f() { branch=$(git rev-parse --abbrev-ref HEAD) && git push --force-with-lease --set-upstream -- origin $branch ; }; f"
+    rp = "!f() { git r && git p ; }; f"
+    rip = "!f() { git ri && git p ; }; f"
+
     safe-rebase-target = "!f() { safe-rebase-target; }; f"
-    r = "!f() { git fetch ; git rebase $(git safe-rebase-target); }; f"
-    ri= "!f() { git fetch ; git rebase -i $(git safe-rebase-target); }; f"
-    p = "!f() { branch=$(git rev-parse --abbrev-ref HEAD); git push --force-with-lease --set-upstream -- origin $branch; }; f"
-    rp = "!f() { git r; git p; }; f"
-    rip = "!f() { git ri; git p; }; f"
-    summon = "!f() { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b ; }; f"
+    master = "!f() { git status --porcelain && git fetch && git checkout master && git reset --hard $(git safe-rebase-target) ; }; f"
+
+    # check out a new branch from safe master
+    new-branch = "!f() { git fetch && git checkout -b $1 && git reset --hard $(git safe-rebase-target); }; f"
+
+    #
+    summon = "!f() { b=$1&& git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b ; }; f"
     branches = "branch --sort=-committerdate"
     touching = "rev-list --all --format=%B"
-    fix-dates = "!f() { merge_base=$(git merge-base HEAD origin/master) ; git rebase $merge_base --exec \"git commit --amend --reset-author --no-edit\"; }; f"
-    switch = "!f() { b=`git branches | fzf` ; git checkout $b ; }; f"
-
-
+    switch = "!f() { b=`git branches | fzf` && git checkout $b ; }; f"
 
