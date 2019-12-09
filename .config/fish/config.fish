@@ -17,7 +17,7 @@ if not test -S ~/.ssh/ssh_auth_sock; and test -S "$SSH_AUTH_SOCK"
 	export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
 end
 
-if test $TERM != "screen"; and test -z "$TMUX"
+if test "$TERM" != "screen"; and test -z "$TMUX"
   exec tmux new-session -A -s main
 end
 
