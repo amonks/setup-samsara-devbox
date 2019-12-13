@@ -16,6 +16,7 @@ if status --is-login
 
   # set up config repo
   alias config='/usr/bin/git --git-dir=/home/ubuntu/.cfg/ --work-tree=/home/ubuntu'
+  config config --local status.showUntrackedFiles no
 
   source ~/secrets.fish
   source ~/.config/fish/abbreviations.fish
