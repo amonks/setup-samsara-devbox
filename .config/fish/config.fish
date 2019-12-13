@@ -1,26 +1,28 @@
-[ -f /usr/share/autojump/autojump.fish ]; and source /usr/share/autojump/autojump.fish
-
-set fish_greeting "🐋 🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋"
-
-fish_vi_key_bindings
-
-set -x FZF_DEFAULT_COMMAND 'fd --type f -I'
-
 set -x PATH $PATH ~/bin /snap/bin ~/.cargo/bin
 
-eval (direnv hook fish)
+if status --is-login
+  set fish_greeting "🐋 🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋"
 
-alias config='/usr/bin/git --git-dir=/home/ubuntu/.cfg/ --work-tree=/home/ubuntu'
+  fish_vi_key_bindings
 
-if not test -S ~/.ssh/ssh_auth_sock; and test -S "$SSH_AUTH_SOCK"
-	ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
-	export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+  # Use devbox thingy lol ask shane
+  set -x SSH_AUTH_SOCK /tmp/.devbox_agent.sock
+
+  [ -f /usr/share/autojump/autojump.fish ]; and source /usr/share/autojump/autojump.fish
+  eval (direnv hook fish)
+
+  # files only, respect gitignore
+  set -x FZF_DEFAULT_COMMAND 'fd --type f -I'
+
+  # set up config repo
+  alias config='/usr/bin/git --git-dir=/home/ubuntu/.cfg/ --work-tree=/home/ubuntu'
+
+  source ~/secrets.fish
+  source ~/.config/fish/abbreviations.fish
+
+  # always use tmux
+  if test "$TERM" != "screen"; and test -z "$TMUX"
+    exec tmux new-session -A -s main
+  end
 end
-
-if test "$TERM" != "screen"; and test -z "$TMUX"
-  exec tmux new-session -A -s main
-end
-
-source ~/secrets.fish
-source ~/.config/fish/abbreviations.fish
 
