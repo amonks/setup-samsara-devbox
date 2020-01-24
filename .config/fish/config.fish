@@ -1,5 +1,8 @@
 set -x PATH $PATH ~/bin /snap/bin ~/.cargo/bin
 
+set -x fish_emoji_width 1
+set -x fish_ambiguous_width 1
+
 if status --is-login
   set fish_greeting "🐋 🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋🐋"
 
