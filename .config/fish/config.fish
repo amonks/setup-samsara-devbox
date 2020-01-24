@@ -9,7 +9,12 @@ if status --is-login
   fish_vi_key_bindings
 
   # Use devbox thingy lol ask shane
-  set -x SSH_AUTH_SOCK /tmp/.devbox_agent.sock
+  if ! pstree -s $fish_pid | grep -q mosh-server
+    if ! test "$SSH_AUTH_SOCK" = "/tmp/.devbox_agent.sock"
+      echo "Setting ssh auth sock. We must not be in mosh :thinking:"
+      set -x SSH_AUTH_SOCK /tmp/.devbox_agent.sock
+    end
+  end
 
   [ -f /usr/share/autojump/autojump.fish ]; and source /usr/share/autojump/autojump.fish
   eval (direnv hook fish)
