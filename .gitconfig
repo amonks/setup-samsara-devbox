@@ -42,5 +42,6 @@
     summon = "!f() { b=$1&& git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b ; }; f"
     branches = "branch --sort=-committerdate"
     touching = "rev-list --all --format=%B"
-    switch = "!f() { b=`git branches | fzf` && git checkout $b ; }; f"
+    choose = "!f() { git branches | fzf | sed 's/^\\* //g' | xargs echo -n ; }; f"
+    switch = "!f() { b=`git choose` && git checkout $b ; }; f"
 
