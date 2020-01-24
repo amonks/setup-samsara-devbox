@@ -30,6 +30,14 @@
     # check out a new branch from safe master
     new-branch = "!f() { git fetch && git checkout -b $1 && git reset --hard $(git safe-rebase-target); }; f"
 
+    # diff branch by message
+    miff = "!f() { commit-message-diff $1 $2 | column -t -s'\t' ; }; f"
+
+    # commit
+    c = "commit -pv"
+
+    uncommit = "reset HEAD~"
+
     #
     summon = "!f() { b=$1&& git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b ; }; f"
     branches = "branch --sort=-committerdate"
