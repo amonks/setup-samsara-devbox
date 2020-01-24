@@ -49,14 +49,11 @@ end
 
 function update
   do get_env
-  and echo 'delete *.shot'
   and find . -name '*.shot' | enquote | xargs rm
   do yarn
-  # and do git clean -fd react
   and do sync-copied-ts
   and do gql-schema-ts
   and do generate-gql-subscription-mocks
-  and do rm -rf react/snaps
   and do generate-component-tests
   and do yarn lint --fix
   and do ./bin/prettier-write
