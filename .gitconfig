@@ -16,8 +16,8 @@
     editor = vim
 
 [alias]
-    r = "!f() { git fetch && target=$(git safe-rebase-target) && git rebase $target --exec \"git commit --amend --reset-author --no-edit\" ; }; f"
-    ri= "!f() { git fetch && target=$(git safe-rebase-target) && git rebase -i $target && git rebase $target --exec \"git commit --amend --reset-author --no-edit\" ; }; f"
+    r = "!f() { git fetch && target=$(git safe-rebase-target) && git rebase $target --exec \"git commit --amend \\\"--date=$(date)\\\" --no-edit\" ; }; f"
+    ri= "!f() { git fetch && target=$(git safe-rebase-target) && git rebase -i $target && git rebase $target --exec \"git commit --amend \\\"--date=$(date)\\\" --no-edit\" ; }; f"
     p = "!f() { branch=$(git rev-parse --abbrev-ref HEAD) && git push --force-with-lease --set-upstream -- origin $branch ; }; f"
     rp = "!f() { git r && git p ; }; f"
     rip = "!f() { git ri && git p ; }; f"
