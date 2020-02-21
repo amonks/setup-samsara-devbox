@@ -32,6 +32,7 @@
 
     safe-rebase-target = "!f() { safe-rebase-target; }; f"
     master = "!f() { git status --porcelain && git fetch && git checkout master && git reset --hard $(git safe-rebase-target) ; }; f"
+    devbox = "!f() { git fetch && git checkout $(ssh devbox 'cd ~/co/backend && git rev-parse --short HEAD'); }; f"
 
     # check out a new branch from safe master
     new-branch = "!f() { git fetch && git checkout -b $1 && git reset --hard $(git safe-rebase-target); }; f"
