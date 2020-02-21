@@ -18,7 +18,8 @@
     autocorrect = 1
 
 [core]
-    editor = vim
+  editor = vim
+  pager = delta --theme=zenburn
 
 [alias]
     r = "!f() { git fetch && target=$(git safe-rebase-target) && git rebase $target --exec \"git commit --amend \\\"--date=$(date)\\\" --no-edit\" ; }; f"
