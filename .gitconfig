@@ -23,7 +23,8 @@
 
 [alias]
     r = "!f() { git fetch && target=$(git safe-rebase-target) && git rebase $target --exec \"git commit --amend \\\"--date=$(date)\\\" --no-edit\" ; }; f"
-    ri= "!f() { git fetch && target=$(git safe-rebase-target) && git rebase -i $target && git rebase $target --exec \"git commit --amend \\\"--date=$(date)\\\" --no-edit\" ; }; f"
+    ri = "!f() { git fetch && target=$(git safe-rebase-target) && git rebase -i $target && git rebase $target --exec \"git commit --amend \\\"--date=$(date)\\\" --no-edit\" ; }; f"
+    i = "!f() { git fetch && target=$(git safe-rebase-target) && git rebase -i $target ; }; f"
     p = "!f() { branch=$(git rev-parse --abbrev-ref HEAD) && git push --force-with-lease --set-upstream -- origin $branch ; }; f"
     rp = "!f() { git r && git p ; }; f"
     rip = "!f() { git ri && git p ; }; f"
@@ -43,6 +44,7 @@
     # commit
     c = "commit -pv"
 
+    stat = "show --stat"
     uncommit = "reset HEAD~"
 
     #
@@ -50,7 +52,7 @@
     branches = "branch --sort=-committerdate"
     touching = "rev-list --all --format=%B"
     choose = "!f() { git branches | fzf | sed 's/^\\* //g' | xargs echo -n ; }; f"
-    switch = "!f() { b=`git choose` && git checkout $b ; }; f"
+    change = "!f() { b=`git choose` && git checkout $b ; }; f"
 
     backtrack = "rebase -i HEAD~10"
 
