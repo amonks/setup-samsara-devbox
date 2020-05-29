@@ -19,9 +19,13 @@ function fish_prompt
   set -l dirty    $red"●"
   set -l none     "◦"
 
-  # pwd
-  # echo -n "☁️ 🦉 "
-  echo -n $white"☁︎ "$normal_color
+  if test -z "$machine_sigil"
+    set machine_sigil "?"
+  end
+  # set -l caret    "$fish"
+  set -l caret    ">"
+
+  echo -n $white"$machine_sigil "$normal_color
   echo -n $cyan(prompt_pwd) $normal_color
 
   if git_is_repo
@@ -39,9 +43,9 @@ function fish_prompt
 
   # prompt
   if test $last_command_status -eq 0
-    echo -n -s $white ">" $normal_color
+    echo -n -s $white "$caret" $normal_color
   else
-    echo -n -s $red ">" $normal_color
+    echo -n -s $red "$caret" $normal_color
   end
 
   set_color $fish_color_cwd
