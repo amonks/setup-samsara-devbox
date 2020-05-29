@@ -118,6 +118,64 @@ if ! which fzf; then
 fi
 echo
 
+if ! which jq ; then
+  section Installing jq
+  sudo apt-get install -y gq
+  end_section
+fi
+echo
+
+if ! which direnv ; then
+  section Installing direnv
+  sudo apt-get install -y direnv
+  end_section
+fi
+echo
+
+if ! which iotop ; then
+  section Installing iotop
+  sudo apt-get install -y iotop
+  end_section
+fi
+echo
+
+if ! which dot ; then
+  section Installing graphiz
+  sudo apt-get install -y graphviz
+  end_section
+fi
+echo
+
+if ! which tldr ; then
+  section Installing tldr
+  sudo apt-get install -y tldr
+  end_section
+fi
+echo
+
+if ! which tree ; then
+  section Installing tree
+  sudo apt-get install -y tree
+  end_section
+fi
+echo
+
+if ! which ctop ; then
+  section Installing ctop
+  sudo apt-get install -y ctop
+  end_section
+fi
+echo
+
+if ! which htop ; then
+  section Installing htop
+  sudo apt-get install -y htop
+  end_section
+fi
+echo
+
+
+
 
 python3 -m pip install --user --upgrade pynvim
 python2 -m pip install --user --upgrade pynvim
