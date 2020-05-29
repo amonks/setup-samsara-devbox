@@ -58,6 +58,11 @@ echo
 
 if ! which rg; then
   section Installing ripgrep
+
+  # https://github.com/fish-shell/fish-shell/issues/5822#issuecomment-589959589
+  # hopefully this won't be necessary in the next version of ripgrep
+  sudo dpkg-divert --add --divert  /usr/share/fish/completions/rg.fish.0 --rename --package ripgrep /usr/share/fish/completions/rg.fish
+
   rg_version=11.0.2
   wget https://github.com/BurntSushi/ripgrep/releases/download/${rg_version}/ripgrep_${rg_version}_amd64.deb
   sudo apt install ./ripgrep_${rg_version}_amd64.deb
