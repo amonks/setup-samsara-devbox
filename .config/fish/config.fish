@@ -17,9 +17,10 @@ if status --is-login
 
   # Use devbox thingy lol ask shane
   if ! pstree -s $fish_pid | grep -q mosh-server
-    if ! test "$SSH_AUTH_SOCK" = "/tmp/.devbox_agent.sock"
-      echo "Setting ssh auth sock. We must not be in mosh :thinking:"
-      set -x SSH_AUTH_SOCK /tmp/.devbox_agent.sock
+    if test -f "/tmp/.devbox_agent.sock"
+      if ! test "$SSH_AUTH_SOCK" = "/tmp/.devbox_agent.sock"
+        set -x SSH_AUTH_SOCK /tmp/.devbox_agent.sock
+      end
     end
   end
 
