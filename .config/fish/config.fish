@@ -35,7 +35,6 @@ if status --is-login
   config config --local status.showUntrackedFiles no
 
   source ~/secrets.fish
-  source ~/.config/fish/abbreviations.fish
 
   # always use tmux
   if test "$TERM" != "screen"; and test -z "$TMUX"
