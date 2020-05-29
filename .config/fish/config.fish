@@ -1,3 +1,10 @@
+# If config.fish is being executed outside a terminal, it's probably some
+# program, like, say, ms-vscode-remote.remote-ssh. That program probably
+# expects bash.
+if test -z "$TERM"
+  bash
+end
+
 set -x PATH $PATH ~/bin /snap/bin ~/.cargo/bin
 
 set -x fish_emoji_width 1
