@@ -49,6 +49,7 @@ end
 
 function update
   do get_env
+  and do import-languages
   and find . -name '*.shot' | enquote | xargs rm
   do yarn
   and do sync-copied-ts
