@@ -1,0 +1,45 @@
+#!/usr/bin/env fish
+
+
+function exclaim
+  echo $argv
+  say $argv
+end
+
+function do
+  echo
+  echo ">" $argv
+  $argv
+end
+
+function guard
+  if test $status -ne 0
+    exclaim $argv
+    exit 1
+  end
+end
+
+function enquote
+  perl -pe 's/^(.*)$/"$1"/g'
+end
+
+function update
+  find . -name '*.shot' | enquote | xargs rm
+  do generate-component-tests
+  guard "fail"
+
+  do yarn lint --fix
+  do yarn lint --fix
+  guard "fail"
+
+  do ./bin/prettier-write
+
+  do yarn jest react -u 
+  guard "fail"
+end
+
+cd $BACKEND_ROOT/mobile/Troy
+update
+guard "fail"
+exit 0
+
