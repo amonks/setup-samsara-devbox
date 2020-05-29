@@ -16,7 +16,7 @@ if status --is-login
     end
   end
 
-  [ -f /usr/share/autojump/autojump.fish ]; and source /usr/share/autojump/autojump.fish
+  test -f /usr/share/autojump/autojump.fish; and source /usr/share/autojump/autojump.fish
   eval (direnv hook fish)
 
   # files only, respect gitignore
