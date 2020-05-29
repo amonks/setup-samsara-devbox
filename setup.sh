@@ -181,6 +181,14 @@ python3 -m pip install --user --upgrade pynvim
 python2 -m pip install --user --upgrade pynvim
 
 
+if ! test -f ~/locals.fish ; then
+  echo "set -u machine_sigil \"₷ \"" > ~/locals.fish
+  echo "Edit ~/locals.fish"
+  echo
+fi
+
+
+
 
 
 
